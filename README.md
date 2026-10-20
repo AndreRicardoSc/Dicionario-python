@@ -1,165 +1,253 @@
-# 📘 Dicionário de Python
-
-**Estudante:** André Ricardo Schultz  
-**Disciplina:** Lógica de Programação
-**Linguagem:** Python
-
-## Sumário
-
-1. [Entrada e saída de dados](#1-entrada-e-saída-de-dados)
-2. [Variáveis e tipos de dados](#2-variáveis-e-tipos-de-dados)
-3. [Operadores](#3-operadores)
-4. [Estruturas condicionais](#4-estruturas-condicionais)
-5. [Estruturas de repetição](#5-estruturas-de-repetição)
-6. [Manipulação de números](#6-manipulação-de-números)
-7. [Manipulação de strings](#7-manipulação-de-strings)
-8. [Manipulação de listas](#8-manipulação-de-listas)
-9. [Tuplas, conjuntos e dicionários](#9-tuplas-conjuntos-e-dicionários)
-10. [Funções](#10-funções)
-11. [Manipulação de arquivos](#11-manipulação-de-arquivos)
-12. [Tratamento de exceções](#12-tratamento-de-exceções)
-13. [Bibliotecas úteis](#13-bibliotecas-úteis)
-
----
+# Dicionário de Python
 
 ## 1. Entrada e saída de dados
 
 ### `print()`
 
-Exibe informações na tela.
+**Finalidade:** Exibe informações na tela.
 
 ```python
 nome = "André"
 print("Olá,", nome)
 ```
 
-**Saída:** `Olá, André`
+**Saída:**
+```text
+Olá, André
+```
 
 ### `input()`
 
-Permite receber informações digitadas pelo usuário. O valor retornado é uma string.
+**Finalidade:** Lê informações digitadas pelo usuário. O valor retornado é uma string.
 
 ```python
 nome = input("Digite seu nome: ")
-print(f"Bem-vindo, {nome}!")
+print(nome)
 ```
 
-### `int()`
+### `input().split()`
 
-Converte um valor compatível para um número inteiro.
+**Finalidade:** Lê uma linha e separa os valores utilizando espaços em branco como separadores, retornando uma lista de strings.
 
 ```python
-idade = int(input("Digite sua idade: "))
-print(idade + 1)
+valores = input().split()
+print(valores)
 ```
 
-### `float()`
-
-Converte um valor compatível para um número decimal.
-
-```python
-preco = float(input("Digite o preço: "))
-print(preco)
-```
-
-### `sep` e `end`
-
-O parâmetro `sep` define o separador entre valores, enquanto `end` define o que será colocado ao final da impressão.
-
-```python
-print("2026", "10", "16", sep="-")
-print("Olá", end=" ")
-print("mundo!")
+**Entrada:**
+```text
+10 20 30
 ```
 
 **Saída:**
 ```text
-2026-10-16
-Olá mundo!
+['10', '20', '30']
 ```
+
+### `map()`
+
+**Finalidade:** Aplica uma função a cada elemento de um iterável, permitindo converter vários valores de uma vez.
+
+```python
+numeros = map(int, input().split())
+print(list(numeros))
+```
+
+**Entrada:**
+```text
+10 20 30
+```
+
+**Saída:**
+```text
+[10, 20, 30]
+```
+
+### Leitura de dois números na mesma linha
+
+**Finalidade:** Lê dois números inteiros, separando-os por espaços e armazenando cada valor em uma variável.
+
+```python
+x, y = map(int, input().split())
+
+print(x)
+print(y)
+```
+
+**Entrada:**
+```text
+5 10
+```
+
+**Saída:**
+```text
+5
+10
+```
+
+### Leitura de um vetor em uma única linha
+
+**Finalidade:** Lê vários números inteiros e armazena todos em uma lista, que também pode ser chamada de vetor.
+
+```python
+vetor = list(map(int, input().split()))
+
+print(vetor)
+```
+
+**Entrada:**
+```text
+1 2 3 4 5
+```
+
+**Saída:**
+```text
+[1, 2, 3, 4, 5]
+```
+
+**Explicação dos comandos:**
+
+- `input()` lê a linha digitada.
+- `.split()` separa os valores.
+- `map(int, ...)` converte cada valor para inteiro.
+- `list(...)` armazena os valores em uma lista.
+
+### Leitura de uma quantidade definida de números
+
+**Finalidade:** Lê uma quantidade de números informada pelo usuário e armazena os valores em uma lista.
+
+```python
+n = int(input())
+vetor = list(map(int, input().split()))
+
+print(n)
+print(vetor)
+```
+
+**Entrada:**
+```text
+4
+10 20 30 40
+```
+
+**Saída:**
+```text
+4
+[10, 20, 30, 40]
+```
+
+---
 
 ## 2. Variáveis e tipos de dados
 
 ### Variáveis
 
-Armazenam valores que podem ser utilizados e modificados durante a execução do programa.
+**Finalidade:** Armazenam valores que podem ser utilizados e modificados durante a execução do programa.
 
 ```python
 nome = "André"
 idade = 17
 altura = 1.75
 
-print(nome)
-print(idade)
-print(altura)
-```
-
-### Armazenamento em linha
-
-Suportam mais de um valor em uma única linha de entrada, sendo a quantidade conhecida ou não.
-
-```python
-a, b = map(int, input().split()) #quantidade conhecida. Ex: 2 (a e b)
-
-vetor = list(map(int, input().split())) #quantidade desconhecida. Ex: N valores
+print(nome, idade, altura)
 ```
 
 ### Tipos de dados
+
+**Finalidade:** Definem a natureza dos valores armazenados nas variáveis.
 
 | Tipo | Descrição | Exemplo |
 |---|---|---|
 | `int` | Números inteiros | `idade = 17` |
 | `float` | Números decimais | `altura = 1.75` |
-| `str` | Textos | `nome = "André"` |
+| `str` | Textos | `nome = "Ana"` |
 | `bool` | Valores lógicos | `aprovado = True` |
-| `list` | Lista de elementos | `notas = [8, 9, 10]` |
-| `tuple` | Coleção imutável | `coordenadas = (10, 20)` |
-| `dict` | Pares de chave e valor | `aluno = {"nome": "Ana"}` |
-| `set` | Elementos únicos | `numeros = {1, 2, 3}` |
-| `NoneType` | Ausência de valor | `resultado = None` |
+| `list` | Lista de elementos | `numeros = [1, 2, 3]` |
 
 ### `type()`
 
-Retorna o tipo de uma variável ou valor.
-
-```python
-idade = 17
-print(type(idade))
-```
-
-**Saída:** `<class 'int'>`
-
-### Conversão de tipos
-
-As funções `int()`, `float()`, `str()` e `bool()` convertem valores entre tipos compatíveis.
+**Finalidade:** Identifica o tipo de dado de uma variável.
 
 ```python
 numero = 10
-
-print(str(numero))
-print(float(numero))
+print(type(numero))
 ```
 
-### Operador de atribuição `=`
+**Saída:**
+```text
+<class 'int'>
+```
 
-Atribui um valor a uma variável.
+### `int()`
+
+**Finalidade:** Converte um valor compatível para inteiro.
 
 ```python
-saldo = 100
-saldo = saldo + 50
-
-print(saldo)
+numero = int("25")
+print(numero + 5)
 ```
 
-**Saída:** `150`
+**Saída:** `30`
+
+### `float()`
+
+**Finalidade:** Converte um valor compatível para número decimal.
+
+```python
+numero = float("2.5")
+print(numero * 2)
+```
+
+**Saída:** `5.0`
+
+### `str()`
+
+**Finalidade:** Converte um valor para texto.
+
+```python
+idade = 17
+texto = str(idade)
+
+print("Idade: " + texto)
+```
+
+### `bool()`
+
+**Finalidade:** Converte um valor para verdadeiro ou falso.
+
+```python
+print(bool(1))
+print(bool(0))
+```
+
+**Saída:**
+```text
+True
+False
+```
+
+### Atribuição de variáveis
+
+**Finalidade:** O operador `=` atribui um valor a uma variável.
+
+```python
+numero = 10
+numero = numero + 5
+
+print(numero)
+```
+
+**Saída:** `15`
+
+---
 
 ## 3. Operadores
 
 ### Operadores aritméticos
 
-Realizam operações matemáticas.
+**Finalidade:** Realizam operações matemáticas.
 
-| Operador | Finalidade | Exemplo | Resultado |
+| Operador | Operação | Exemplo | Resultado |
 |---|---|---|---|
 | `+` | Adição | `5 + 3` | `8` |
 | `-` | Subtração | `5 - 3` | `2` |
@@ -170,17 +258,21 @@ Realizam operações matemáticas.
 | `**` | Potenciação | `2 ** 3` | `8` |
 
 ```python
-numero = 10
+a = 10
+b = 3
 
-print(numero + 5)
-print(numero * 2)
-print(numero % 3)
-print(numero ** 2)
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a // b)
+print(a % b)
+print(a ** b)
 ```
 
-### Operadores de comparação
+### Operadores relacionais
 
-Comparam valores e retornam `True` ou `False`.
+**Finalidade:** Comparam valores e retornam `True` ou `False`.
 
 | Operador | Finalidade |
 |---|---|
@@ -192,74 +284,88 @@ Comparam valores e retornam `True` ou `False`.
 | `<=` | Menor ou igual a |
 
 ```python
-idade = 18
+a = 10
+b = 5
 
-print(idade >= 18)
-print(idade == 18)
-print(idade < 18)
+print(a > b)
+print(a == b)
+print(a != b)
+```
+
+**Saída:**
+```text
+True
+False
+True
 ```
 
 ### Operadores lógicos
 
-Combinam ou invertem condições.
+**Finalidade:** Combinam condições ou invertem seus resultados.
 
-- `and`: ambas as condições precisam ser verdadeiras.
-- `or`: pelo menos uma condição precisa ser verdadeira.
-- `not`: inverte o valor lógico.
+- `and`: verdadeiro quando ambas as condições são verdadeiras.
+- `or`: verdadeiro quando pelo menos uma condição é verdadeira.
+- `not`: inverte o resultado lógico.
 
 ```python
 idade = 20
-possui_documento = True
 
-print(idade >= 18 and possui_documento)
-print(idade < 18 or possui_documento)
-print(not possui_documento)
+print(idade >= 18 and idade < 60)
+print(idade < 18 or idade >= 60)
+print(not idade < 18)
 ```
 
-### Operadores de atribuição composta
+### Operadores de atribuição
 
-Permitem atualizar o valor de uma variável.
+**Finalidade:** Atribuem ou atualizam valores de variáveis.
 
-| Operador | Exemplo |
-|---|---|
-| `+=` | `x += 5` |
-| `-=` | `x -= 5` |
-| `*=` | `x *= 2` |
-| `/=` | `x /= 2` |
-| `//=` | `x //= 2` |
-| `%=` | `x %= 3` |
-| `**=` | `x **= 2` |
+| Operador | Exemplo | Equivalência |
+|---|---|---|
+| `=` | `x = 10` | Atribui 10 |
+| `+=` | `x += 2` | `x = x + 2` |
+| `-=` | `x -= 2` | `x = x - 2` |
+| `*=` | `x *= 2` | `x = x * 2` |
+| `/=` | `x /= 2` | `x = x / 2` |
+| `//=` | `x //= 2` | `x = x // 2` |
+| `%=` | `x %= 2` | `x = x % 2` |
+| `**=` | `x **= 2` | `x = x ** 2` |
 
 ```python
-saldo = 100
-saldo += 50
-saldo -= 20
+x = 10
+x += 5
 
-print(saldo)
+print(x)
 ```
 
-**Saída:** `130`
+**Saída:** `15`
 
-### Operadores de identidade e pertencimento
+### Operadores de pertencimento
 
-- `is` e `is not`: verificam se duas referências apontam para o mesmo objeto.
-- `in` e `not in`: verificam se um elemento pertence a uma coleção ou sequência.
+**Finalidade:** Verificam se um elemento está presente em uma sequência ou coleção.
+
+- `in`: verifica se o elemento está presente.
+- `not in`: verifica se o elemento não está presente.
 
 ```python
-frutas = ["maçã", "banana", "uva"]
+numeros = [1, 2, 3, 4, 5]
 
-print("banana" in frutas)
-print("laranja" not in frutas)
-
-valor = None
-print(valor is None)
+print(3 in numeros)
+print(8 not in numeros)
 ```
+
+**Saída:**
+```text
+True
+True
+```
+
+---
 
 ## 4. Estruturas condicionais
 
 ### `if`
 
-Executa um bloco quando uma condição é verdadeira.
+**Finalidade:** Executa um bloco de código quando uma condição é verdadeira.
 
 ```python
 idade = 18
@@ -268,22 +374,9 @@ if idade >= 18:
     print("Maior de idade")
 ```
 
-### `else`
-
-Executa um bloco alternativo quando a condição do `if` é falsa.
-
-```python
-idade = 16
-
-if idade >= 18:
-    print("Maior de idade")
-else:
-    print("Menor de idade")
-```
-
 ### `elif`
 
-Verifica condições adicionais quando as anteriores são falsas.
+**Finalidade:** Verifica outra condição quando as condições anteriores são falsas.
 
 ```python
 nota = 7
@@ -292,65 +385,51 @@ if nota >= 9:
     print("Excelente")
 elif nota >= 7:
     print("Aprovado")
-else:
-    print("Recuperação")
 ```
 
-### Condicionais aninhadas
+### `else`
 
-São estruturas condicionais colocadas dentro de outras estruturas condicionais.
+**Finalidade:** Executa um bloco quando as condições anteriores não são satisfeitas.
+
+```python
+nota = 5
+
+if nota >= 7:
+    print("Aprovado")
+else:
+    print("Reprovado")
+```
+
+### Condicionais combinadas
+
+**Finalidade:** Utilizam operadores lógicos para verificar várias condições.
 
 ```python
 idade = 20
-possui_ingresso = True
+tem_documento = True
 
-if idade >= 18:
-    if possui_ingresso:
-        print("Entrada permitida")
-    else:
-        print("Ingresso necessário")
+if idade >= 18 and tem_documento:
+    print("Entrada permitida")
 else:
-    print("Entrada não permitida")
+    print("Entrada negada")
 ```
 
-### Operador condicional em uma linha
-
-Permite escolher um valor de acordo com uma condição.
-
-```python
-idade = 20
-situacao = "Maior de idade" if idade >= 18 else "Menor de idade"
-
-print(situacao)
-```
+---
 
 ## 5. Estruturas de repetição
 
 ### `for`
 
-Percorre os elementos de uma sequência ou coleção.
+**Finalidade:** Percorre os elementos de uma sequência ou executa um bloco para cada elemento.
 
 ```python
-frutas = ["maçã", "banana", "uva"]
-
-for fruta in frutas:
-    print(fruta)
-```
-
-### `range()`
-
-Gera uma sequência de números, normalmente utilizada com `for`.
-
-```python
-for numero in range(1, 6):
+for numero in [1, 2, 3, 4, 5]:
     print(numero)
 ```
 
-**Saída:** números de `1` até `5`.
-
 ### `while`
 
-Repete um bloco enquanto uma condição for verdadeira.
+**Finalidade:** Repete um bloco de código enquanto uma condição for verdadeira.
 
 ```python
 contador = 1
@@ -360,9 +439,20 @@ while contador <= 5:
     contador += 1
 ```
 
+### `range()`
+
+**Finalidade:** Gera uma sequência de números, sendo utilizada principalmente com `for`.
+
+```python
+for numero in range(1, 6):
+    print(numero)
+```
+
+**Saída:** Números de `1` até `5`.
+
 ### `break`
 
-Interrompe o laço de repetição.
+**Finalidade:** Interrompe imediatamente o laço de repetição.
 
 ```python
 for numero in range(1, 10):
@@ -371,9 +461,11 @@ for numero in range(1, 10):
     print(numero)
 ```
 
+**Saída:** `1`, `2`, `3` e `4`.
+
 ### `continue`
 
-Pula a iteração atual e passa para a próxima.
+**Finalidade:** Pula a iteração atual e continua com a próxima.
 
 ```python
 for numero in range(1, 6):
@@ -382,241 +474,277 @@ for numero in range(1, 6):
     print(numero)
 ```
 
-### `pass`
+**Saída:** `1`, `2`, `4` e `5`.
 
-Não executa nenhuma ação e pode ser utilizado como marcador para código que será implementado posteriormente.
+### Percorrendo um vetor com `for`
 
-```python
-def futura_funcao():
-    pass
-
-print("Programa executado")
-```
-
-### `enumerate()`
-
-Permite percorrer uma sequência obtendo o índice e o valor de cada elemento.
+**Finalidade:** Acessa cada elemento de uma lista sem precisar utilizar seu índice.
 
 ```python
-nomes = ["Ana", "Pedro", "Lucas"]
+vetor = [10, 20, 30, 40]
 
-for indice, nome in enumerate(nomes):
-    print(indice, nome)
+for numero in vetor:
+    print(numero)
 ```
 
-### `zip()`
+### Percorrendo um vetor por índices
 
-Combina elementos de duas ou mais sequências.
+**Finalidade:** Utiliza os índices para acessar os elementos de uma lista.
 
 ```python
-nomes = ["Ana", "Pedro"]
-notas = [9, 8]
+vetor = [10, 20, 30, 40]
 
-for nome, nota in zip(nomes, notas):
-    print(f"{nome}: {nota}")
+for i in range(len(vetor)):
+    print(vetor[i])
 ```
 
-## 6. Manipulação de números
+### Soma dos elementos de um vetor
+
+**Finalidade:** Percorre uma lista e acumula a soma de seus elementos.
+
+```python
+vetor = [10, 20, 30]
+soma = 0
+
+for numero in vetor:
+    soma += numero
+
+print(soma)
+```
+
+**Saída:** `60`
+
+---
+
+## 6. Funções para números
 
 ### `abs()`
 
-Retorna o valor absoluto de um número.
+**Finalidade:** Retorna o valor absoluto de um número.
 
 ```python
-print(abs(-15))
+print(abs(-10))
 ```
 
-**Resultado:** `15`
+**Saída:** `10`
 
 ### `round()`
 
-Arredonda um número para a quantidade de casas decimais indicada.
+**Finalidade:** Arredonda um número para a quantidade de casas decimais indicada.
 
 ```python
 print(round(3.14159, 2))
 ```
 
-**Resultado:** `3.14`
+**Saída:** `3.14`
 
-### `min()` e `max()`
+### `pow()`
 
-Retornam o menor e o maior valor, respectivamente.
+**Finalidade:** Calcula a potência de um número.
 
 ```python
-numeros = [10, 5, 20, 8]
+print(pow(2, 3))
+```
+
+**Saída:** `8`
+
+### `min()`
+
+**Finalidade:** Retorna o menor valor de uma coleção ou entre vários argumentos.
+
+```python
+numeros = [10, 5, 20, 3]
 
 print(min(numeros))
+```
+
+**Saída:** `3`
+
+### `max()`
+
+**Finalidade:** Retorna o maior valor de uma coleção ou entre vários argumentos.
+
+```python
+numeros = [10, 5, 20, 3]
+
 print(max(numeros))
 ```
 
+**Saída:** `20`
+
 ### `sum()`
 
-Soma os elementos de uma coleção numérica.
+**Finalidade:** Soma os elementos de uma coleção numérica.
 
 ```python
-notas = [7, 8, 9]
-print(sum(notas))
+numeros = [1, 2, 3, 4]
+
+print(sum(numeros))
 ```
 
-**Resultado:** `24`
+**Saída:** `10`
 
 ### `divmod()`
 
-Retorna uma tupla com o quociente inteiro e o resto da divisão.
+**Finalidade:** Retorna o quociente inteiro e o resto de uma divisão.
 
 ```python
 print(divmod(17, 5))
 ```
 
-**Resultado:** `(3, 2)`
+**Saída:** `(3, 2)`
 
-### `math.sqrt()`
+### `int()` e `float()` em cálculos
 
-Calcula a raiz quadrada de um número.
+**Finalidade:** Convertem valores para permitir operações matemáticas.
 
 ```python
-import math
+a = int("10")
+b = float("2.5")
 
-print(math.sqrt(81))
+print(a + b)
 ```
 
-**Resultado:** `9.0`
+**Saída:** `12.5`
 
-### `math.ceil()` e `math.floor()`
+---
 
-Arredondam um número para cima ou para baixo, respectivamente.
+## 7. Funções para strings
 
-```python
-import math
+### `upper()`
 
-print(math.ceil(4.2))
-print(math.floor(4.8))
-```
-
-**Resultados:** `5` e `4`.
-
-### `random.randint()`
-
-Gera um número inteiro aleatório entre os limites informados, incluindo ambos.
+**Finalidade:** Converte todos os caracteres alfabéticos para maiúsculas.
 
 ```python
-import random
-
-numero = random.randint(1, 10)
-print(numero)
-```
-
-## 7. Manipulação de strings
-
-Strings são sequências de caracteres utilizadas para representar textos.
-
-### `len()`
-
-Retorna a quantidade de caracteres.
-
-```python
-texto = "Python"
-print(len(texto))
-```
-
-**Resultado:** `6`
-
-### `upper()` e `lower()`
-
-Convertem as letras para maiúsculas ou minúsculas.
-
-```python
-texto = "Python"
-
+texto = "python"
 print(texto.upper())
+```
+
+**Saída:** `PYTHON`
+
+### `lower()`
+
+**Finalidade:** Converte todos os caracteres alfabéticos para minúsculas.
+
+```python
+texto = "PYTHON"
 print(texto.lower())
 ```
 
-### `capitalize()` e `title()`
-
-`capitalize()` coloca o primeiro caractere em maiúscula. `title()` coloca a primeira letra de cada palavra em maiúscula.
-
-```python
-print("olá mundo".capitalize())
-print("olá mundo".title())
-```
+**Saída:** `python`
 
 ### `strip()`
 
-Remove espaços em branco do início e do final da string.
+**Finalidade:** Remove espaços em branco do início e do final de uma string.
 
 ```python
-nome = "   André   "
-print(nome.strip())
+texto = "   Python   "
+print(texto.strip())
 ```
+
+**Saída:** `Python`
 
 ### `replace()`
 
-Substitui um trecho de texto por outro.
+**Finalidade:** Substitui um trecho de texto por outro.
 
 ```python
 texto = "Eu gosto de Java"
 print(texto.replace("Java", "Python"))
 ```
 
+**Saída:** `Eu gosto de Python`
+
 ### `split()`
 
-Divide uma string em uma lista de partes.
+**Finalidade:** Divide uma string em uma lista de partes, utilizando espaços em branco como separadores por padrão.
 
 ```python
-frase = "Python é uma linguagem"
-palavras = frase.split()
-
-print(palavras)
+texto = "10 20 30"
+print(texto.split())
 ```
 
-### `join()`
+**Saída:** `['10', '20', '30']`
 
-Une elementos de uma sequência de strings utilizando um separador.
+**Aplicação com números:**
 
 ```python
-palavras = ["Python", "é", "legal"]
-frase = " ".join(palavras)
+numeros = list(map(int, input().split()))
+print(numeros)
+```
 
-print(frase)
+**Entrada:**
+```text
+10 20 30
+```
+
+**Saída:**
+```text
+[10, 20, 30]
 ```
 
 ### `find()`
 
-Retorna o índice da primeira ocorrência de um trecho. Se não encontrar, retorna `-1`.
+**Finalidade:** Retorna o índice da primeira ocorrência de um trecho. Se não encontrar, retorna `-1`.
 
 ```python
-texto = "Programação Python"
-print(texto.find("Python"))
+texto = "Python é legal"
+print(texto.find("legal"))
 ```
 
-**Resultado:** `12`
+**Saída:** `10`
 
-### `startswith()` e `endswith()`
+### `len()`
 
-Verificam se uma string começa ou termina com determinado trecho.
+**Finalidade:** Retorna a quantidade de caracteres de uma string.
 
 ```python
-arquivo = "dados.csv"
-
-print(arquivo.startswith("dados"))
-print(arquivo.endswith(".csv"))
+texto = "Python"
+print(len(texto))
 ```
 
-### `count()`
+**Saída:** `6`
 
-Conta quantas vezes um trecho aparece.
+### `startswith()`
+
+**Finalidade:** Verifica se uma string começa com determinado trecho.
 
 ```python
-texto = "banana"
-print(texto.count("a"))
+texto = "Python"
+print(texto.startswith("Py"))
 ```
 
-**Resultado:** `3`
+**Saída:** `True`
+
+### `endswith()`
+
+**Finalidade:** Verifica se uma string termina com determinado trecho.
+
+```python
+arquivo = "dados.txt"
+print(arquivo.endswith(".txt"))
+```
+
+**Saída:** `True`
+
+### `isdigit()`
+
+**Finalidade:** Verifica se todos os caracteres da string são dígitos.
+
+```python
+print("12345".isdigit())
+print("12a45".isdigit())
+```
+
+**Saída:**
+```text
+True
+False
+```
 
 ### F-strings
 
-Permitem inserir variáveis e expressões diretamente em textos.
+**Finalidade:** Permitem inserir variáveis diretamente em textos.
 
 ```python
 nome = "André"
@@ -625,619 +753,367 @@ idade = 17
 print(f"Meu nome é {nome} e tenho {idade} anos.")
 ```
 
-### Indexação e fatiamento
+---
 
-Permitem acessar caracteres ou partes de uma string.
+## 8. Funções para listas (vetores)
+
+### Criação de uma lista
+
+**Finalidade:** Armazena vários elementos em uma única variável.
+
+```python
+vetor = [10, 20, 30, 40]
+
+print(vetor)
+```
+
+### `list()`
+
+**Finalidade:** Cria uma lista a partir de um iterável.
 
 ```python
 texto = "Python"
+letras = list(texto)
 
-print(texto[0])
-print(texto[-1])
-print(texto[0:3])
+print(letras)
 ```
 
-**Resultados:** `P`, `n` e `Pyt`.
+**Saída:** `['P', 'y', 't', 'h', 'o', 'n']`
 
-## 8. Manipulação de listas
+### `len()`
 
-Listas armazenam coleções ordenadas e mutáveis de elementos.
-
-### Criação e acesso
+**Finalidade:** Retorna a quantidade de elementos de uma lista.
 
 ```python
-frutas = ["maçã", "banana", "uva"]
+vetor = [10, 20, 30, 40]
 
-print(frutas[0])
-print(frutas[-1])
+print(len(vetor))
 ```
+
+**Saída:** `4`
 
 ### `append()`
 
-Adiciona um elemento ao final da lista.
+**Finalidade:** Adiciona um elemento ao final da lista.
 
 ```python
-frutas = ["maçã", "banana"]
-frutas.append("uva")
+vetor = [10, 20, 30]
+vetor.append(40)
 
-print(frutas)
+print(vetor)
 ```
+
+**Saída:** `[10, 20, 30, 40]`
 
 ### `insert()`
 
-Insere um elemento em uma posição específica.
+**Finalidade:** Insere um elemento em uma posição específica.
 
 ```python
-numeros = [10, 30]
-numeros.insert(1, 20)
+vetor = [10, 30, 40]
+vetor.insert(1, 20)
 
-print(numeros)
+print(vetor)
 ```
 
-### `extend()`
-
-Adiciona os elementos de outra sequência à lista.
-
-```python
-numeros = [1, 2]
-numeros.extend([3, 4])
-
-print(numeros)
-```
+**Saída:** `[10, 20, 30, 40]`
 
 ### `remove()`
 
-Remove a primeira ocorrência de um valor.
+**Finalidade:** Remove a primeira ocorrência de um valor.
 
 ```python
-frutas = ["maçã", "banana", "uva"]
-frutas.remove("banana")
+vetor = [10, 20, 30]
+vetor.remove(20)
 
-print(frutas)
+print(vetor)
 ```
+
+**Saída:** `[10, 30]`
 
 ### `pop()`
 
-Remove e retorna um elemento da lista. Sem argumento, remove o último.
+**Finalidade:** Remove e retorna um elemento da lista. Sem argumento, remove o último elemento.
 
 ```python
-numeros = [10, 20, 30]
-removido = numeros.pop()
+vetor = [10, 20, 30]
+valor = vetor.pop()
 
-print(removido)
-print(numeros)
+print(valor)
+print(vetor)
+```
+
+**Saída:**
+```text
+30
+[10, 20]
 ```
 
 ### `sort()`
 
-Ordena os elementos da lista.
+**Finalidade:** Ordena os elementos da lista em ordem crescente por padrão.
 
 ```python
-numeros = [5, 2, 8, 1]
-numeros.sort()
+vetor = [5, 2, 8, 1]
+vetor.sort()
 
-print(numeros)
+print(vetor)
 ```
+
+**Saída:** `[1, 2, 5, 8]`
 
 Para ordenar em ordem decrescente:
 
 ```python
-numeros.sort(reverse=True)
-print(numeros)
+vetor = [5, 2, 8, 1]
+vetor.sort(reverse=True)
+
+print(vetor)
 ```
+
+**Saída:** `[8, 5, 2, 1]`
 
 ### `reverse()`
 
-Inverte a ordem dos elementos.
+**Finalidade:** Inverte a ordem atual dos elementos da lista.
 
 ```python
-numeros = [1, 2, 3]
-numeros.reverse()
+vetor = [10, 20, 30]
+vetor.reverse()
 
-print(numeros)
+print(vetor)
 ```
 
-### `index()` e `count()`
+**Saída:** `[30, 20, 10]`
 
-`index()` retorna a posição da primeira ocorrência. `count()` conta quantas vezes um valor aparece.
+### `index()`
+
+**Finalidade:** Retorna o índice da primeira ocorrência de um valor.
 
 ```python
-numeros = [10, 20, 10, 30]
+vetor = [10, 20, 30]
 
-print(numeros.index(20))
-print(numeros.count(10))
+print(vetor.index(20))
 ```
 
-### `copy()` e `clear()`
+**Saída:** `1`
 
-`copy()` cria uma cópia superficial da lista. `clear()` remove todos os elementos.
+### `count()`
+
+**Finalidade:** Conta quantas vezes um valor aparece na lista.
 
 ```python
-original = [1, 2, 3]
-copia = original.copy()
+vetor = [1, 2, 2, 3, 2]
 
-copia.append(4)
-print(original)
-print(copia)
-
-copia.clear()
-print(copia)
+print(vetor.count(2))
 ```
 
-### Fatiamento de listas
+**Saída:** `3`
 
-Permite obter partes de uma lista.
+### `sum()`
+
+**Finalidade:** Soma os elementos numéricos da lista.
 
 ```python
-numeros = [10, 20, 30, 40, 50]
+vetor = [10, 20, 30]
 
-print(numeros[1:4])
-print(numeros[:3])
-print(numeros[::2])
+print(sum(vetor))
 ```
 
-### List comprehension
+**Saída:** `60`
 
-Permite criar listas de forma compacta.
+### `max()` e `min()`
+
+**Finalidade:** Retornam o maior e o menor elemento da lista.
 
 ```python
-quadrados = [numero ** 2 for numero in range(1, 6)]
+vetor = [10, 5, 30, 15]
 
-print(quadrados)
+print(max(vetor))
+print(min(vetor))
 ```
 
-**Resultado:** `[1, 4, 9, 16, 25]`
+**Saída:**
+```text
+30
+5
+```
 
-## 9. Tuplas, conjuntos e dicionários
+### Acesso por índice
 
-### Tuplas (`tuple`)
-
-São coleções ordenadas e imutáveis.
+**Finalidade:** Permite acessar um elemento específico pelo seu índice. A contagem começa em zero.
 
 ```python
-coordenadas = (10, 20)
+vetor = [10, 20, 30]
 
-print(coordenadas[0])
-print(coordenadas[1])
-print(len(coordenadas))
+print(vetor[0])
+print(vetor[2])
 ```
 
-### Conjuntos (`set`)
+**Saída:**
+```text
+10
+30
+```
 
-Armazenam elementos únicos, sem garantir uma ordem específica.
+### Leitura de um vetor em uma linha
+
+**Finalidade:** Lê vários números inteiros separados por espaços e os armazena em uma lista.
 
 ```python
-numeros = {1, 2, 2, 3}
-print(numeros)
+vetor = list(map(int, input().split()))
+
+print(vetor)
 ```
 
-### `add()`
+**Entrada:**
+```text
+4 8 12 16
+```
 
-Adiciona um elemento ao conjunto.
+**Saída:**
+```text
+[4, 8, 12, 16]
+```
+
+### Leitura de dois valores em uma linha
+
+**Finalidade:** Armazena dois números inteiros em variáveis distintas.
 
 ```python
-numeros = {1, 2}
-numeros.add(3)
+x, y = map(int, input().split())
 
-print(numeros)
+print(x + y)
 ```
 
-### `discard()`
+**Entrada:**
+```text
+5 7
+```
 
-Remove um elemento, caso exista, sem gerar erro se estiver ausente.
+**Saída:** `12`
+
+### Soma dos elementos de um vetor
+
+**Finalidade:** Calcula a soma de todos os valores armazenados na lista.
 
 ```python
-numeros = {1, 2, 3}
-numeros.discard(2)
+vetor = [1, 2, 3, 4, 5]
 
-print(numeros)
+soma = sum(vetor)
+
+print(soma)
 ```
 
-### `union()` e `intersection()`
+**Saída:** `15`
 
-`union()` retorna a união dos conjuntos. `intersection()` retorna os elementos presentes em ambos.
+---
 
-```python
-a = {1, 2, 3}
-b = {3, 4, 5}
-
-print(a.union(b))
-print(a.intersection(b))
-```
-
-### Dicionários (`dict`)
-
-Armazenam informações em pares de chave e valor.
-
-```python
-aluno = {
-    "nome": "André",
-    "idade": 17,
-    "nota": 9.0
-}
-
-print(aluno["nome"])
-print(aluno["nota"])
-```
-
-### `get()`
-
-Obtém o valor de uma chave, permitindo definir um valor padrão caso ela não exista.
-
-```python
-aluno = {"nome": "André"}
-
-print(aluno.get("nome"))
-print(aluno.get("turma", "Não informada"))
-```
-
-### `keys()`, `values()` e `items()`
-
-Permitem acessar as chaves, os valores e os pares de um dicionário.
-
-```python
-aluno = {"nome": "Ana", "idade": 16}
-
-print(aluno.keys())
-print(aluno.values())
-print(aluno.items())
-```
-
-### `update()`
-
-Adiciona ou atualiza pares de chave e valor.
-
-```python
-aluno = {"nome": "Ana", "idade": 16}
-aluno.update({"idade": 17, "nota": 9})
-
-print(aluno)
-```
-
-### `pop()`
-
-Remove uma chave e retorna seu valor.
-
-```python
-aluno = {"nome": "Ana", "idade": 17}
-idade = aluno.pop("idade")
-
-print(idade)
-print(aluno)
-```
-
-### Percorrendo um dicionário
-
-```python
-produto = {
-    "nome": "Teclado",
-    "preco": 150
-}
-
-for chave, valor in produto.items():
-    print(f"{chave}: {valor}")
-```
-
-## 10. Funções
-
-Funções são blocos de código reutilizáveis que executam tarefas específicas.
-
-### `def`
-
-Define uma função.
-
-```python
-def saudacao():
-    print("Olá, mundo!")
-
-saudacao()
-```
-
-### Parâmetros e argumentos
-
-Permitem fornecer informações para uma função.
-
-```python
-def saudacao(nome):
-    print(f"Olá, {nome}!")
-
-saudacao("André")
-```
-
-### `return`
-
-Retorna um resultado para o local onde a função foi chamada.
-
-```python
-def somar(a, b):
-    return a + b
-
-resultado = somar(5, 3)
-print(resultado)
-```
-
-### Parâmetros com valores padrão
-
-Definem valores utilizados quando um argumento não é informado.
-
-```python
-def calcular_preco(preco, desconto=0):
-    return preco - (preco * desconto / 100)
-
-print(calcular_preco(100))
-print(calcular_preco(100, 10))
-```
-
-### Argumentos nomeados
-
-Permitem informar valores pelo nome dos parâmetros.
-
-```python
-def apresentar(nome, idade):
-    print(f"{nome} tem {idade} anos.")
-
-apresentar(idade=17, nome="André")
-```
-
-### `lambda`
-
-Cria uma função anônima simples.
-
-```python
-dobro = lambda numero: numero * 2
-
-print(dobro(5))
-```
-
-### `map()`
-
-Aplica uma função a cada elemento de uma sequência.
-
-```python
-numeros = [1, 2, 3]
-dobros = list(map(lambda n: n * 2, numeros))
-
-print(dobros)
-```
-
-### `filter()`
-
-Seleciona os elementos que atendem a uma condição.
-
-```python
-numeros = [1, 2, 3, 4, 5, 6]
-pares = list(filter(lambda n: n % 2 == 0, numeros))
-
-print(pares)
-```
-
-## 11. Manipulação de arquivos
-
-Python permite criar, ler e modificar arquivos.
+## 9. Manipulação de arquivos
 
 ### `open()`
 
-Abre um arquivo para leitura ou escrita.
+**Finalidade:** Abre um arquivo para leitura ou escrita.
+
+Principais modos:
 
 | Modo | Finalidade |
 |---|---|
-| `"r"` | Leitura |
-| `"w"` | Escrita, substituindo o conteúdo |
-| `"a"` | Adição ao final do arquivo |
-| `"x"` | Criação exclusiva de um arquivo novo |
-| `"b"` | Modo binário |
-| `"+"` | Leitura e escrita combinadas com outro modo |
+| `"r"` | Abre para leitura |
+| `"w"` | Abre para escrita, substituindo o conteúdo |
+| `"a"` | Adiciona conteúdo ao final |
+| `"x"` | Cria um arquivo novo, gerando erro se ele já existir |
 
-### `with open()`
-
-Abre um arquivo e garante seu fechamento automático ao sair do bloco.
+```python
+arquivo = open("dados.txt", "w", encoding="utf-8")
+arquivo.write("Olá, Python!")
+arquivo.close()
+```
 
 ### `write()`
 
-Escreve texto em um arquivo.
+**Finalidade:** Escreve texto em um arquivo.
 
 ```python
-with open("dados.txt", "w", encoding="utf-8") as arquivo:
-    arquivo.write("Olá, Python!\n")
-    arquivo.write("Arquivo criado com sucesso.")
+arquivo = open("dados.txt", "w", encoding="utf-8")
+arquivo.write("Primeira linha\n")
+arquivo.write("Segunda linha")
+arquivo.close()
 ```
 
 ### `read()`
 
-Lê todo o conteúdo de um arquivo.
+**Finalidade:** Lê todo o conteúdo de um arquivo.
 
 ```python
-with open("dados.txt", "r", encoding="utf-8") as arquivo:
-    conteudo = arquivo.read()
-
+arquivo = open("dados.txt", "r", encoding="utf-8")
+conteudo = arquivo.read()
 print(conteudo)
+arquivo.close()
 ```
 
 ### `readline()`
 
-Lê uma linha do arquivo.
+**Finalidade:** Lê uma linha do arquivo por vez.
 
 ```python
-with open("dados.txt", "r", encoding="utf-8") as arquivo:
-    primeira_linha = arquivo.readline()
-
-print(primeira_linha)
+arquivo = open("dados.txt", "r", encoding="utf-8")
+linha = arquivo.readline()
+print(linha)
+arquivo.close()
 ```
 
 ### `readlines()`
 
-Retorna uma lista contendo as linhas do arquivo.
+**Finalidade:** Lê todas as linhas e as retorna em uma lista.
 
 ```python
-with open("dados.txt", "r", encoding="utf-8") as arquivo:
-    linhas = arquivo.readlines()
-
+arquivo = open("dados.txt", "r", encoding="utf-8")
+linhas = arquivo.readlines()
 print(linhas)
+arquivo.close()
 ```
 
-### Modo `"a"`
+### `close()`
 
-Adiciona texto ao final do arquivo sem substituir o conteúdo anterior.
+**Finalidade:** Fecha um arquivo aberto, liberando os recursos utilizados.
+
+```python
+arquivo = open("dados.txt", "w", encoding="utf-8")
+arquivo.write("Teste")
+arquivo.close()
+```
+
+### `with`
+
+**Finalidade:** Abre um arquivo e fecha-o automaticamente ao final do bloco, mesmo que ocorra um erro.
+
+```python
+with open("dados.txt", "w", encoding="utf-8") as arquivo:
+    arquivo.write("Arquivo salvo com sucesso.")
+```
+
+### Adicionando conteúdo a um arquivo
+
+**Finalidade:** Utiliza o modo `"a"` para acrescentar informações sem apagar o conteúdo existente.
 
 ```python
 with open("dados.txt", "a", encoding="utf-8") as arquivo:
-    arquivo.write("\nNova informação adicionada.")
+    arquivo.write("\nNova informação")
 ```
 
-### `seek()`
+### Lendo um arquivo linha por linha
 
-Altera a posição de leitura ou escrita dentro do arquivo.
+**Finalidade:** Percorre o arquivo sem precisar carregar todas as linhas em uma lista.
 
 ```python
 with open("dados.txt", "r", encoding="utf-8") as arquivo:
-    arquivo.seek(0)
-    print(arquivo.read())
+    for linha in arquivo:
+        print(linha.strip())
 ```
 
-### `tell()`
+**Observação:** os exemplos de leitura pressupõem que o arquivo `dados.txt` já tenha sido criado. Os exemplos de escrita criam o arquivo caso ele não exista.
 
-Retorna a posição atual do cursor no arquivo.
+---
 
-```python
-with open("dados.txt", "r", encoding="utf-8") as arquivo:
-    print(arquivo.tell())
-    arquivo.read(5)
-    print(arquivo.tell())
-```
-
-**Observação:** os exemplos de leitura pressupõem que o arquivo `dados.txt` já tenha sido criado.
-
-## 12. Tratamento de exceções
-
-Permite tratar erros durante a execução do programa.
-
-### `try` e `except`
-
-O `try` contém o código que pode gerar um erro, enquanto o `except` define como tratá-lo.
-
-```python
-try:
-    numero = int(input("Digite um número inteiro: "))
-    print(numero * 2)
-except ValueError:
-    print("Digite um número inteiro válido.")
-```
-
-### `else`
-
-É executado quando nenhuma exceção ocorre no bloco `try`.
-
-```python
-try:
-    numero = int("10")
-except ValueError:
-    print("Valor inválido")
-else:
-    print(f"Número convertido: {numero}")
-```
-
-### `finally`
-
-É executado ao final do tratamento, independentemente de ter ocorrido uma exceção.
-
-```python
-try:
-    print("Executando operação")
-except Exception:
-    print("Ocorreu um erro")
-finally:
-    print("Operação finalizada")
-```
-
-### `raise`
-
-Permite gerar uma exceção manualmente.
-
-```python
-def verificar_idade(idade):
-    if idade < 0:
-        raise ValueError("A idade não pode ser negativa.")
-    return idade
-
-print(verificar_idade(18))
-```
-
-### Tratamento de erros de arquivos
-
-```python
-try:
-    with open("inexistente.txt", "r", encoding="utf-8") as arquivo:
-        print(arquivo.read())
-except FileNotFoundError:
-    print("O arquivo não foi encontrado.")
-```
-
-## 13. Bibliotecas úteis
-
-### `math`
-
-Oferece funções e constantes matemáticas.
-
-```python
-import math
-
-print(math.pi)
-print(math.sqrt(25))
-print(math.factorial(5))
-```
-
-### `random`
-
-Gera valores aleatórios e seleciona elementos de sequências.
-
-```python
-import random
-
-print(random.randint(1, 100))
-print(random.choice(["Python", "Java", "JavaScript"]))
-```
-
-### `datetime`
-
-Permite trabalhar com datas e horários.
-
-```python
-from datetime import date, datetime
-
-hoje = date.today()
-agora = datetime.now()
-
-print(hoje)
-print(agora)
-```
-
-### `statistics`
-
-Oferece funções para cálculos estatísticos básicos.
-
-```python
-import statistics
-
-notas = [7, 8, 9, 10]
-
-print(statistics.mean(notas))
-print(statistics.median(notas))
-```
-
-### `json`
-
-Permite converter dados entre estruturas Python e o formato JSON.
-
-```python
-import json
-
-aluno = {"nome": "André", "idade": 17}
-
-texto_json = json.dumps(aluno, ensure_ascii=False)
-print(texto_json)
-
-aluno_convertido = json.loads(texto_json)
-print(aluno_convertido["nome"])
-```
-
-**Referência:** [Documentação oficial do Python em português](https://docs.python.org/pt-br/3/)
+**Documentação oficial:** [Python — Documentação em português](https://docs.python.org/pt-br/3/)
